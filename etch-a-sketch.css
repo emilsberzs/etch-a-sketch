@@ -19,11 +19,25 @@ body {
 }
 
 .horizontal {
-    background-color: aqua;
     flex-direction: row;
 }
 
 .vertical {
     background-color: white;
     flex-direction: column;
+}
+
+#outer_container {
+    flex-direction: column;
+    display:flex;
+    justify-content: space-around;
+    flex-grow: 0;
+}
+
+#reset_button {
+    width: 20%;
+    height: 50px;
+    margin-top:20px;
+    margin-left:40%;
+    border-radius: 10px;
 }
