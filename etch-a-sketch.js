@@ -17,9 +17,27 @@ document.querySelector('button').onclick = function () {
         container.removeChild(container.lastChild)
     }
     unique_id = 1 //Reset unique_id
-    width = prompt("Enter width for your grid: ")//Prompt for the new width
+    width = getWidth()
     makeGrid()
     drawGrid()
+}
+
+function getWidth() {
+    let choice = 0;
+    let is_valid = false;
+    do {
+        choice = prompt("Enter number (min 16-max 200) to choose size of grid: ")
+        if (choice == null) //User clicked cancel
+
+        choice = parseInt(choice);
+        is_valid = choice >= 16 && choice <= 200 ; //Make sure enetered width is in acceptable range
+        if (is_valid) {
+            return choice;
+        }
+        else {
+            ("Let's try again. Eneter number between 16 and 200")
+        }
+    } while (!is_valid)
 }
 
 function isMouseDown() {
