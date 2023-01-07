@@ -7,7 +7,11 @@ const container = document.createElement('div'); //Create and initialize div for
 container.id = 'container' //Add #id to container
 outer_container.appendChild(container) //Append container to body
 
-document.querySelector('button').onclick = function () { 
+var mouse_down = 0; //Check if mouse button is pressed
+document.body.onmousedown = function () { mouse_down = 1; console.log('down') } //make true when mouse clicked down
+document.body.onmouseup = function () { mouse_down = 0; console.log('up') } //revert to false when released
+
+document.querySelector('button').onclick = function () {
     //Remove all current grid squares
     while (container.hasChildNodes()) {
         container.removeChild(container.lastChild)
@@ -16,6 +20,14 @@ document.querySelector('button').onclick = function () {
     width = prompt("Enter width for your grid: ")//Prompt for the new width
     makeGrid()
     drawGrid()
+}
+
+function isMouseDown() {
+    document.pre
+    while (document.body.onmousedown) {
+        console.log('mousedown')
+        return true;
+    }
 }
 
 function makeGrid() {
@@ -31,31 +43,34 @@ function makeGrid() {
             v_div.classList.add('square', 'vertical')
             v_div.id = unique_id //Add ID to reference for color change
             v_div.style.width = 800 / width + 'px' //Make individual square size adaptable, no matter how many squares, the board stays same size.
-            v_div.style.height = 800 / width + 'px' 
+            v_div.style.height = 800 / width + 'px'
             unique_id++ //Increment unique ID for next square
             h_div.appendChild(v_div) //Append each stack to its horizontal
         }
     }
 }
 
-function drawGrid() {
+function drawGrid(event) {
     if (document.getElementById(1)) {
         for (let i = 1; i <= width * width; i++) {
             document.getElementById(i).addEventListener('mouseover', function () {
-                document.getElementById(i).style.backgroundColor = 'black'
+                if (mouse_down == 1) {
+                    document.getElementById(i).style.backgroundColor = 'black'
+                }
             })
         }
     }
 }
 
-makeGrid()
-drawGrid()
 
+makeGrid()
+outer_container.addEventListener('mousedown', drawGrid)
 
 /*
 TO DO:
-1.Gradient change in colot
+1.Gradient change in color
 2.Color picker
 3.Sanitizing for new width
 4.width slider perhaps?
+5.Draw only when mousedown
 */
