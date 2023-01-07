@@ -11,6 +11,9 @@ var mouse_down = 0; //Check if mouse button is pressed
 document.body.onmousedown = function () { mouse_down = 1; console.log('down') } //make true when mouse clicked down
 document.body.onmouseup = function () { mouse_down = 0; console.log('up') } //revert to false when released
 
+let random_color = '' //Generate random hex color
+
+
 document.querySelector('button').onclick = function () {
     //Remove all current grid squares
     while (container.hasChildNodes()) {
@@ -20,6 +23,10 @@ document.querySelector('button').onclick = function () {
     width = getWidth()
     makeGrid()
     drawGrid()
+}
+
+function getColor () {
+    return '#' + Math.floor(Math.random()*16777215).toString(16)
 }
 
 function getWidth() {
@@ -73,7 +80,7 @@ function drawGrid(event) {
         for (let i = 1; i <= width * width; i++) {
             document.getElementById(i).addEventListener('mouseover', function () {
                 if (mouse_down == 1) {
-                    document.getElementById(i).style.backgroundColor = 'black'
+                    document.getElementById(i).style.backgroundColor = getColor()
                 }
             })
         }
